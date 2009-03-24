@@ -1,0 +1,3 @@
+%li{ :id => "attachment_#{attachment.id}" }
+  = attachment.filename
+  = link_to_remote "Remove", :url  => attachment_path(:id => attachment), :method => :delete, :html => { :title  => "Remove this attachment" }
