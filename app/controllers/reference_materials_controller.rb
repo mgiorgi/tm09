@@ -1,5 +1,8 @@
 class ReferenceMaterialsController < ApplicationController
+  layout 'enter'
+  before_filter :login_required
   before_filter :set_reference_material, :only => [:show]
+
   def index
     @reference_materials = ReferenceMaterial.all
   end
