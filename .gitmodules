@@ -1,3 +1,6 @@
 [submodule "role_requirement"]
 	path = role_requirement
 	url = /home/manya/workspace/memoria/vendor/plugins/role_requirement/.git
+[submodule "restful_authentication"]
+	path = restful_authentication
+	url = /home/manya/workspace/memoria/vendor/plugins/restful_authentication/.git
