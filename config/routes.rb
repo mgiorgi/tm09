@@ -16,7 +16,9 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
 
   map.namespace :admin do |admin|
-    #admin.resources :attachments
+    admin.root :controller => 'home'
+    admin.resources :home
+    admin.resources :roles
     admin.resources :users
     admin.resources :categories
     admin.resources :reference_materials #, :active_scaffold => true do |reference_material|

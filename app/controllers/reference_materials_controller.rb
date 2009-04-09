@@ -2,6 +2,9 @@ class ReferenceMaterialsController < ApplicationController
   layout 'enter'
   before_filter :login_required
   before_filter :set_reference_material, :only => [:show]
+  #require_role "nivel1", :for_all_except => [:index, :show]
+  require_role "nivel1", :for => [:index]
+  #require_role "nivel2", :for => [:nivel2]
 
   def index
     @reference_materials = ReferenceMaterial.all

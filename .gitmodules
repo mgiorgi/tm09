@@ -1,0 +1,3 @@
+[submodule "role_requirement"]
+	path = role_requirement
+	url = /home/manya/workspace/memoria/vendor/plugins/role_requirement/.git
