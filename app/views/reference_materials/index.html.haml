@@ -1,0 +1,15 @@
+%h1
+  Material de Referencia
+%table
+  %thead
+    %tr
+      %th
+        Título
+      %th
+        Descripción
+      %th
+        Categoria
+      %th
+        Adjunto
+  %tbody
+    = render :partial => 'reference_material', :collection => @reference_materials

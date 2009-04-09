@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.root :controller => 'home', :action => 'index'
 
   map.namespace :admin do |admin|
     #admin.resources :attachments
@@ -8,6 +9,8 @@ ActionController::Routing::Routes.draw do |map|
     #  reference_material.resources :attachments, :active_scaffold => true
     #end
   end
+
+  map.resources :reference_materials
 
   # The priority is based upon order of creation: first created -> highest priority.
 
