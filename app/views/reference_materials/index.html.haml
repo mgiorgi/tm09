@@ -1,30 +1,13 @@
-- if logged_in?
-  %p
-    %strong
-      You are logged in as
-      = h current_user.login
-  %p
-    = link_to 'Logout', logout_path
-  %h1
-    Material de Referencia
-  %table
-    %thead
-      %tr
-        %th
-          Título
-        %th
-          Descripción
-        %th
-          Categoria
-        %th
-          Adjunto
-    %tbody
-      = render :partial => 'reference_material', :collection => @reference_materials
-- else
-  %p
-    %strong
-      You are currently not logged in.
-  %p
-    = link_to('Login', login_path)
-    or
-    = link_to 'Sign Up', signup_path
+%h1
+  Material de Referencia
+%table
+  %thead
+    %tr
+      %th
+        Título
+      %th
+        Descripción
+      %th
+        Adjunto
+  %tbody
+    = render :partial => 'reference_material', :collection => @reference_materials

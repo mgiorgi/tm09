@@ -4,7 +4,6 @@ class CreateReferenceMaterials < ActiveRecord::Migration
       t.string :title
       t.string :description
       t.string :filename
-      t.references :category
       t.timestamps
     end
   end

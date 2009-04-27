@@ -9,22 +9,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090409213849) do
-
-  create_table "categories", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20090410021209) do
 
   create_table "reference_materials", :force => true do |t|
     t.string   "title"
     t.string   "description"
     t.string   "filename"
-    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "reference_materials_roles", :id => false, :force => true do |t|
+    t.integer "reference_material_id"
+    t.integer "role_id"
+  end
+
+  add_index "reference_materials_roles", ["reference_material_id"], :name => "index_reference_materials_roles_on_reference_material_id"
+  add_index "reference_materials_roles", ["role_id"], :name => "index_reference_materials_roles_on_role_id"
 
   create_table "roles", :force => true do |t|
     t.string "name"

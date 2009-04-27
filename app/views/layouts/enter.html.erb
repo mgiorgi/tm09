@@ -15,11 +15,11 @@ Released for free under a Creative Commons Attribution 2.5 License
 <body>
 <div id="menu">
 	<ul>
-		<li class="first"><a href="#" id="menu1" accesskey="1" title="">Inicio</a></li>
-		<li><a href="#" id="menu2" accesskey="2" title="">Talleres</a></li>
+    <li class='first'><%= link_to "Inicio", root_path, :id => "menu1", :accesskey => "1", :title => "" %></li>
+    <li><%= link_to "Talleres", groups_path, :id => "menu2", :accesskey => "2", :title => "" %></li>
     <li><%= link_to "Materiales", reference_materials_path, :id => "menu3", :accesskey => "3", :title => "" %></li>
-		<li><a href="#" id="menu4" accesskey="4" title="">Acerca de</a></li>
-		<li><a href="#" id="menu5" accesskey="5" title="">Contacto</a></li>
+		<li><%= link_to "Acerca de", about_us_path, :id => "menu4", :accesskey => "4", :title => "" %></li>
+		<li><%= link_to "Contacto", contact_us_path, :id => "menu5", :accesskey => "5", :title => "" %></li>
 	</ul>
 </div>
 <div id="logo">
@@ -27,7 +27,16 @@ Released for free under a Creative Commons Attribution 2.5 License
 	<h2><a href="http://www.freecsstemplates.org/">By Free CSS Templates</a></h2>
 </div>
 <div id="content">
-  <%= yield  %>
+	<div id="colA">
+    <div class='nav1'>
+      <ul>
+        <li><%= link_to("Ingresar", login_path) unless logged_in? %></li>
+        <li><%= link_to("Salir", logout_path) if logged_in? %></li>
+      </ul>
+    </div>
+    <%= yield  %>
+  </div>
+  <%= render :partial => 'menu' unless controller_name == 'sessions' %>
 </div>
 <div id="footer">
 	<p>Copyright &copy; 2007 Enter. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>

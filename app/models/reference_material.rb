@@ -1,5 +1,5 @@
 class ReferenceMaterial < ActiveRecord::Base
-  belongs_to :category
+  has_and_belongs_to_many :roles
   file_column :filename
 
   def full_path

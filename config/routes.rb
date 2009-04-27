@@ -18,15 +18,17 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.root :controller => 'home'
     admin.resources :home
-    admin.resources :roles
-    admin.resources :users
-    admin.resources :categories
-    admin.resources :reference_materials #, :active_scaffold => true do |reference_material|
+    admin.resources :roles, :active_scaffold => true
+    admin.resources :users, :active_scaffold => true
+    admin.resources :reference_materials, :active_scaffold => true #do |reference_material|
     #  reference_material.resources :attachments, :active_scaffold => true
     #end
   end
 
-  map.resources :reference_materials
+  map.resources :reference_materials, :collection => { :nivel1 => :get, :nivel2 => :get }
+  map.resources :groups
+  map.resources :about_us
+  map.resources :contact_us
 
   # The priority is based upon order of creation: first created -> highest priority.
 
