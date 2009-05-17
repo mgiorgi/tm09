@@ -22,6 +22,6 @@ module ActionController
                                            method, *arguments)
       end
     end
-    alias_method_chain :process, :browser_profiling
+    #alias_method_chain :process, :browser_profiling
   end
 end
