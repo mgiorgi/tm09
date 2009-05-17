@@ -1,1 +1,0 @@
-/home/manya/workspace/memoria/app/controllers/application_controller.rb
