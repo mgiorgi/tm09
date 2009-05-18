@@ -1,5 +1,4 @@
 class Admin::ReferenceMaterialsController < Admin::BaseController
-=begin
   active_scaffold :reference_materials do  |config|
     config.label = "Material de Referencia"
     config.create.columns = [:title, :description, :filename]
@@ -11,7 +10,6 @@ class Admin::ReferenceMaterialsController < Admin::BaseController
       name_group.add :title, :description, :filename, :roles
     end    
   end
-=end
     #config.columns.add :uploaded_data
     #config.create.multipart = true
     #config.update.multipart = true
