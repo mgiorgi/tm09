@@ -1,0 +1,1 @@
+/home/manya/workspace/talleresdememoria/app/controllers/application_controller.rb
