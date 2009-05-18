@@ -60,7 +60,7 @@ after "deploy:migrations" , "deploy:cleanup"
 after "deploy:update_code", "deploy:symlink_configs"
 after  "deploy:update", "db:symlink"
 after  "deploy:update", "applicationcontroller:symlink"
-after  "deploy:update", "hostingrails:create_htaccess"
+after  "deploy:update", "hostingrails:config_fcgi"
 before "deploy:migrate", "applicationcontroller:symlink"
 before "deploy:migrations", "applicationcontroller:symlink"
 
@@ -95,11 +95,12 @@ namespace :applicationcontroller do
 end
 
 namespace :hostingrails do
-  task :create_htaccess do
-    #run "cp #{deploy_to}/current/public/.htaccess_skeleton #{deploy_to}/current/public/.htaccess"
-    #run "rm #{deploy_to}/current/public/.htaccess_skeleton"
-    run "cp  #{home_dir}/1001anecdotes/dispatch* #{deploy_to}/current/public"
-    run "cp  #{home_dir}/1001anecdotes/.htaccess #{deploy_to}/current/public"
+  task :config_fcgi do
+    transaction do
+      #run "cp  #{home_dir}/1001anecdotes/dispatch* #{deploy_to}/current/public"
+      #run "cp  #{home_dir}/1001anecdotes/.htaccess #{deploy_to}/current/public"
+      run "for i in `find #{deploy_to}/current -type d` ; do chmod g-w $i; done"
+    end
   end
 end
 
