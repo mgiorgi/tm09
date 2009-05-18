@@ -1,4 +1,5 @@
 class Admin::UsersController < Admin::BaseController
+=begin
   active_scaffold :user do |config|
     config.columns = [ :login, :name, :email, :password, :password_confirmation, :roles ]
     list.columns.exclude :password_confirmation, :password
@@ -8,4 +9,5 @@ class Admin::UsersController < Admin::BaseController
     columns[:password].label = "Password"
     columns[:password_confirmation].label = "Confirmación de Password"
   end
+=end
 end

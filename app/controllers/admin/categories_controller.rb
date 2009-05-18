@@ -1,3 +1,3 @@
 class Admin::CategoriesController < Admin::BaseController
-  active_scaffold :categories
+  #active_scaffold :categories
 end

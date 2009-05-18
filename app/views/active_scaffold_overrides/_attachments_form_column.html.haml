@@ -1,7 +1,7 @@
 - fields_for Attachment.new do |attachment|
   %label{ :for => "attachment_data" }
     Attach Files:
-	= attachment.file_field :data
+  = attachment.file_field :data
 %ul#pending_files
   - if @record.attachments.size > 0
     = render :partial => "attachments/attachment", :collection => @record.attachments
