@@ -9,6 +9,7 @@ class Admin::BaseController < ApplicationController
   protected
     def authenticate
       authenticate_or_request_with_http_basic do |username, password|
+        logger.debug "username:#{username} | admin_user:#{ADMIN_USER} | password:#{password} | admin_pass:#{ADMIN_PASS}"
         username == ADMIN_USER && password == ADMIN_PASS
       end
     end
