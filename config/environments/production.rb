@@ -26,3 +26,5 @@ config.action_controller.perform_caching             = true
 
 # Enable threaded mode
 # config.threadsafe!
+ADMIN_USER='admin'
+ADMIN_PASS='admin'
