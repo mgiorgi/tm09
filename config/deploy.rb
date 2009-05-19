@@ -99,7 +99,7 @@ namespace :hostingrails do
     transaction do
       #run "cp  #{home_dir}/1001anecdotes/dispatch* #{deploy_to}/current/public"
       #run "cp  #{home_dir}/1001anecdotes/.htaccess #{deploy_to}/current/public"
-      run "for i in `find #{deploy_to}/current -type d` ; do chmod g-w $i; done"
+      run "for i in `find #{deploy_to}/current/public -type d` ; do chmod g-w $i; done"
     end
   end
 end
