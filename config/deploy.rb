@@ -30,7 +30,7 @@ set :deploy_to, "#{home_dir}/apps/#{application}"
 #############################################################
 
 # comment out if it gives you trouble. newest net/ssh needs this set.
-ssh_options[:keys] = %w(/home/lokkedc/.ssh/id_rsa)
+ssh_options[:keys] = %w(/home/lokkedc/.ssh/talleresdememoria/id_rsa)
 ssh_options[:paranoid] = false
 default_run_options[:pty] = true
 set :use_sudo, false
