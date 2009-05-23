@@ -43,7 +43,7 @@ set :scm_username,          ""
 set :scm_password,          ""
 set :scm,                   :git
 set :branch, "master"
-#set :scm_passphrase, ""
+set :scm_passphrase, "lokked09"
 set :deploy_via,            :remote_cache
 set :repository_cache,      "#{application}_cache"
 set :production_database,   "lokkedc_talleresdememoriaproduction"
