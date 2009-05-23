@@ -55,9 +55,6 @@ set :dbpass,                "bimeleros09"
 set :git_enable_submodules, 1
 
 before "deploy:setup", :db
-after "deploy", "deploy:cleanup"
-after "deploy:migrations" , "deploy:cleanup"
-after "deploy:update_code", "deploy:symlink_configs"
 after  "deploy:update", "db:symlink"
 after  "deploy:update", "applicationcontroller:symlink"
 after  "deploy:symlink", "hostingrails:config_fcgi"
