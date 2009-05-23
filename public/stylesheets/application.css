@@ -85,7 +85,8 @@ a:hover {
 	height: 31px;
 	margin: 0 auto;
 	padding: 130px 0 0 0;
-	background: url(/images/img06.jpg) no-repeat;
+	/* background: url(/images/img06.jpg) no-repeat; */
+	/*background: url(/images/grupoeres2.jpg) no-repeat;*/
 	border-bottom: 10px solid #595959;
 }
 

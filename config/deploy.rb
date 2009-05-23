@@ -38,7 +38,7 @@ set :use_sudo, false
 #############################################################
 #	Git
 #############################################################
-set :repository,            "git@github.com:mgiorgi/tm09.git"
+set :repository,            "git://github.com/mgiorgi/tm09.git"
 set :scm_username,          ""
 set :scm_password,          ""
 set :scm,                   :git
