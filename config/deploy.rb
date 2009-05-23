@@ -138,42 +138,14 @@ namespace :db do
     run "ln -s #{shared_path}/public/system #{release_path}/public/system"
   end
 end
-#############################################################
-#	Passenger
-#############################################################
+
+# We do NOT want the reaper run, since that assumes we are the only FCGI
+# processes on the machine and we have root access.  So, we override the
+# restart task to do the proper site5 thing.
 namespace :deploy do
-  desc "Restarting mod_rails with restart.txt"
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "touch #{current_path}/tmp/restart.txt"
+  desc "Capfile override of the default restart task to eliminate reaper"
+  task :restart, :roles => :app do
+    run "pkill -9 -u #{user} -f dispatch.fcgi"
   end
 end
 
-
-namespace :passenger do
-  desc "Restart Application"
-  task :restart do
-    run "touch #{current_path}/tmp/restart.txt"
-  end
-end
-#after :deploy, "passenger:restart"
-
-namespace :deploy do
-  namespace :web do
-    desc "Serve up a custom maintenance page."
-    task :disable, :roles => :web do
-      require 'erb'
-      on_rollback { run "rm #{shared_path}/system/maintenance.html" }
-      reason = ENV['REASON']
-      deadline = ENV['UNTIL']
-      set :reason, reason
-      set :deadline, deadline
-      template = File.read("app/views/admin/maintenance.html.erb" )
-      page = ERB.new(template).result(binding)
-      put page, "#{shared_path}/system/maintenance.html" ,
-                :mode => 0644
-    end
-  end
-  task :enable, :roles => :web do
-    run "rm #{shared_path}/system/maintenance.html"
-  end
-end
