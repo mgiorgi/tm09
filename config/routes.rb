@@ -18,14 +18,14 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.root :controller => 'home'
     admin.resources :home
-    admin.resources :roles, :active_scaffold => true
+    admin.resources :categories, :active_scaffold => true
     admin.resources :users, :active_scaffold => true
     admin.resources :reference_materials, :active_scaffold => true #do |reference_material|
     #  reference_material.resources :attachments, :active_scaffold => true
     #end
   end
 
-  map.resources :reference_materials, :collection => { :nivel1 => :get, :nivel2 => :get }
+  map.resources :reference_materials
   map.resources :groups
   map.resources :about_us
   map.resources :contact_us

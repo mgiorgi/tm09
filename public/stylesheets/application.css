@@ -7,7 +7,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 body {
 	margin: 0;
 	padding: 0;
-	background: #FFFFFF;
+	background: #d9bae7; /* #FFFFFF; */
 	font: normal small Arial, Helvetica, sans-serif;
 	color: #999999;
 }
@@ -122,10 +122,15 @@ a:hover {
 
 /* Content */
 
-#content {
+#wrapper {
 	width: 704px;
 	margin: 0 auto;
 	border-top: 1px solid #FFFFFF;
+        background: #FFFFFF;
+}
+#content {
+  background: #FFFFFF;
+  float: none;
 }
 
 #colA {
@@ -135,7 +140,7 @@ a:hover {
 }
 
 #colB {
-	float: left;
+	/*float: left;*/
 	width: 220px;
 }
 
