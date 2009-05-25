@@ -3,3 +3,4 @@ public/reference_material/*
 public/attachment/*
 db/*.sqlite3
 config/database.yml
+app/controller/application.rb

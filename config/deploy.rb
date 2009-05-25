@@ -87,7 +87,7 @@ end
 
 namespace :applicationcontroller do
   task :symlink do
-    run "ln -nfs #{deploy_to}/current/app/controllers/application_controller.rb #{deploy_to}/current/app/controllers/application.rb"
+    run "ln -nfs #{release_path}/app/controllers/application_controller.rb #{release_path}/app/controllers/application.rb"
   end
 end
 
