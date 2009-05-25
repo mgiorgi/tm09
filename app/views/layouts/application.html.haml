@@ -8,7 +8,7 @@
     = stylesheet_link_tag 'application', :media => 'screen'
     = yield :styles
 
-    = javascript_include_tag :defaults
+    = javascript_include_tag :defaults, :fckeditor
     = active_scaffold_includes
     = yield :scripts
 
