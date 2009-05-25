@@ -3,11 +3,11 @@ class Admin::ReferenceMaterialsController < Admin::BaseController
     config.label = "Material de Referencia"
     config.create.columns = [:title, :description, :filename]
     config.create.columns.add_subgroup "Name" do |name_group|
-      name_group.add :title, :description, :filename
+      name_group.add :title, :description, :filename, :categories
     end    
-    config.update.columns = [:title, :description, :filename, :roles]
+    config.update.columns = [:title, :description, :filename, :categories]
     config.update.columns.add_subgroup "Name" do |name_group|
-      name_group.add :title, :description, :filename, :roles
+      name_group.add :title, :description, :filename, :categories
     end    
   end
     #config.columns.add :uploaded_data

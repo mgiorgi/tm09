@@ -13,6 +13,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 <link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<div id="wrapper">
 <div id="menu">
 	<ul>
     <li class='first'><%= link_to "Inicio", root_path, :id => "menu1", :accesskey => "1", :title => "" %></li>
@@ -23,23 +24,29 @@ Released for free under a Creative Commons Attribution 2.5 License
 	</ul>
 </div>
 <div id="logo">
-	<!--<h1><a href="#">Enter</a></h1>
-        <h2><a href="http://www.freecsstemplates.org/">By Free CSS Templates</a></h2>-->
         <center style='position:relative; top: -130px'>
           <%= image_tag 'grupoeres2.jpg' %>
         </center>
-</div>
-<div id="content">
-	<div id="colA">
-    <div class='nav1'>
-      <ul>
-        <li><%= link_to("Ingresar", login_path) unless logged_in? %></li>
-        <li><%= link_to("Salir", logout_path) if logged_in? %></li>
-      </ul>
-    </div>
-    <%= yield  %>
+      </div>
+      <div id="content">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td style='vertical-align: top;'>
+              <%= render :partial => 'menu' unless controller_name == 'sessions' %>
+            </td>
+            <td id="colA">
+              <div class='nav1'>
+                <ul>
+                  <li><%= link_to("Ingresar", login_path) unless logged_in? %></li>
+                  <li><%= link_to("Salir", logout_path) if logged_in? %></li>
+                </ul>
+              </div>
+              <%= yield  %>
+            </td>
+          </tr>
+        </table>
   </div>
-  <%= render :partial => 'menu' unless controller_name == 'sessions' %>
+  
 </div>
 <div id="footer">
 	<p>Copyright &copy; 2007 Enter. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
