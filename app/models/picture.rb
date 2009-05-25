@@ -1,0 +1,2 @@
+class Picture < Attachment
+end

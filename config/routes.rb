@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :pictures
+
+  map.resources :articles
+
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
@@ -18,7 +22,9 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.root :controller => 'home'
     admin.resources :home
+    admin.resources :articles
     admin.resources :categories, :active_scaffold => true
+    admin.resources :pictures
     admin.resources :users, :active_scaffold => true
     admin.resources :reference_materials, :active_scaffold => true #do |reference_material|
     #  reference_material.resources :attachments, :active_scaffold => true

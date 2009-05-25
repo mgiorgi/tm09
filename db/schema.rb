@@ -9,7 +9,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090524231741) do
+ActiveRecord::Schema.define(:version => 20090525141438) do
+
+  create_table "articles", :force => true do |t|
+    t.string   "title"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attachments", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "filename"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", :force => true do |t|
     t.string "name"
@@ -19,14 +35,6 @@ ActiveRecord::Schema.define(:version => 20090524231741) do
   create_table "categories_reference_materials", :id => false, :force => true do |t|
     t.integer "reference_material_id"
     t.integer "category_id"
-  end
-
-  create_table "reference_materials", :force => true do |t|
-    t.string   "title"
-    t.string   "description"
-    t.string   "filename"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "reference_materials_roles", :id => false, :force => true do |t|
