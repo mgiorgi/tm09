@@ -118,6 +118,8 @@ namespace :db do
 
     production:
       <<: *defaults
+      username: #{dbuser}
+      password: #{dbpass}
       database: #{production_database}
     EOF
 

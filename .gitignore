@@ -1,3 +1,4 @@
 log/*.log
 public/reference_material/*
 db/*.sqlite3
+config/database.yml
