@@ -42,7 +42,7 @@ end
   <%= render :partial => 'form', :locals => { :columns => active_scaffold_config.update.columns } %>
 
   <p class="form-footer">
-    <input type="submit" value="Update" class="submit" onclick="var oEditor = FCKeditorAPI.GetInstance('record_<%=@record.id%>_<%='content'%>_editor');document.getElementById('record_<%=@record.id%>_<%='content'%>_editor').value = oEditor.GetXHTML();" />
+    <input type="submit" value="Update" class="submit" onclick="var oEditor = FCKeditorAPI.GetInstance('record_<%=@record.id%>_<%='body'%>_editor');document.getElementById('record_<%=@record.id%>_<%='body'%>_editor').value = oEditor.GetXHTML();" />
     <%= link_to as_(:cancel), params_for(:controller => params[:parent_controller] ? params[:parent_controller] : params[:controller], :action => 'list'), :class => 'cancel' %>
     <%= loading_indicator_tag(:action => :update, :id => params[:id]) %>
   </p>
