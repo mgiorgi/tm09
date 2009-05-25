@@ -219,6 +219,7 @@ a:hover {
 	border-bottom: 1px solid #FFFFFF;
 	text-decoration: none;
 	color: #F07242;
+        height: 30px;
 }
 
 .boxedB a:hover {
