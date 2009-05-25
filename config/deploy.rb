@@ -50,7 +50,7 @@ set :production_database,   "lokkedc_talleresdememoriaproduction"
 set :production_dbhost,     "#{domain}"
 set :staging_database,      "memoria_development"
 set :staging_dbhost,        "faces.local"
-set :dbuser,                "lokked_bimeleros"
+set :dbuser,                "lokkedc_bimeleros"
 set :dbpass,                "bimeleros09"
 set :git_enable_submodules, 1
 
@@ -58,8 +58,8 @@ before "deploy:setup", :db
 after  "deploy:update", "db:symlink"
 after  "deploy:update", "applicationcontroller:symlink"
 after  "deploy:symlink", "hostingrails:config_fcgi"
-before "deploy:migrate", "applicationcontroller:symlink"
-before "deploy:migrations", "applicationcontroller:symlink"
+#before "deploy:migrate", "applicationcontroller:symlink"
+#before "deploy:migrations", "applicationcontroller:symlink"
 
 task :staging do  
   role :web, "faces.local"
