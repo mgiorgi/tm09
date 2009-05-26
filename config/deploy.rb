@@ -55,9 +55,12 @@ set :dbpass,                "bimeleros09"
 set :git_enable_submodules, 1
 
 before "deploy:setup", :db
+after  "deploy:setup", :assets
 after  "deploy:update", "applicationcontroller:symlink"
 after  "deploy:update", "db:symlink"
 after  "deploy:symlink", "hostingrails:config_fcgi"
+after  "deploy:update", "assets:symlink"
+
 #before "deploy:migrate", "applicationcontroller:symlink"
 #before "deploy:migrations", "applicationcontroller:symlink"
 
@@ -97,6 +100,19 @@ namespace :hostingrails do
   end
 end
 
+namespace :assets do
+  desc "Set up the assets directory in the shared dir"
+  task :default do
+    run "mkdir -p #{shared_path}/attachment/filename"
+  end
+  desc "Symlink the assets directory from the shared dir"
+  task :symlink do
+    run "rm -rf #{release_path}/public/attachment/filename"
+    run "ln -nfs #{shared_path}/attachment #{release_path}/public/attachment"
+  end
+end
+
+
 #############################################################
 #	DB
 #############################################################
@@ -134,9 +150,9 @@ namespace :db do
   desc "Make symlink for database yaml" 
   task :symlink do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml" 
-    run "mkdir -p #{shared_path}/attachment/filename"
-    run "ln -nfs #{shared_path}/attachment/filename #{shared_path}/public/images/attachments" 
     #run "ln -s #{shared_path}/public/system #{release_path}/public/system"
+    run "mkdir -p #{shared_path}/public/attachment/filename"
+    run "ln -nfs #{shared_path}/attachment/filename #{release_path}/public/images/attachments" 
   end
 end
 
