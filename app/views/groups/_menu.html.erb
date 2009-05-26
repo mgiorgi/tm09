@@ -1,17 +1,10 @@
 	<div id="colB">
 		<div class="boxedB">
-			<h2>Ipsum Dolorem</h2>
+			<h2>Talleres</h2>
 			<ul>
-				<li><a href="#">Maecenas luctus lectus</a></li>
-				<li><a href="#">Etiam rhoncus volutpat</a></li>
-				<li><a href="#">Donec dictum metus in</a></li>
-				<li><a href="#">Integer gravida nibh</a></li>
-				<li><a href="#">Etiam posuere augue sit</a></li>
-				<li><a href="#">Mauris vulputate dolor</a></li>
-				<li><a href="#">Nulla luctus eleifend</a></li>
-				<li><a href="#">Praesent scelerisque</a></li>
-				<li><a href="#">Ut nonummy rutrum sem</a></li>
-				<li><a href="#">Pellentesque tempus quam</a></li>
+				<li><%= link_to Article::Section::ESTIMULACION_MEMORIA, article_path(Article::Section::ESTIMULACION_MEMORIA) %></li>
+                                <li><%= link_to Article::Section::GRUPOS_TERAPEUTICOS, article_path(Article::Section::GRUPOS_TERAPEUTICOS) %></li>
+                                <li><%= link_to Article::Section::TALLERES_YOGA, article_path(Article::Section::TALLERES_YOGA) %></li>                                
 			</ul>
     </div>
   </div>

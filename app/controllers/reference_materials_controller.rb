@@ -15,6 +15,16 @@ class ReferenceMaterialsController < ApplicationController
     send_file(@reference_material.filename, :url_based_filename => true, :filename => File.basename(@reference_material.filename))
   end
 
+  def teorico
+    @reference_materials = ReferenceMaterial.find(:all, :include => [:categories], :conditions => [ 'categories.name <> ?', Category::TEORICO_CATEGORY])
+    render :partial => 'reference_materials'
+  end
+
+  def practico
+    @reference_materials = ReferenceMaterial.find(:all, :include => [:categories], :conditions => [ 'categories.name <> ?', Category::PRACTICO_CATEGORY])
+    render :partial => 'reference_materials'
+  end
+
   private
   def set_reference_material
     @reference_material = ReferenceMaterial.find(params[:id] || params[:reference_material_id])

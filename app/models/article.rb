@@ -1,6 +1,17 @@
 class Article < ActiveRecord::Base
   class Section
+    ABOUT_US = 'Acerca de'
+    CONTACT_US = 'Contacto'
     INICIO = 'Inicio'
+    PSICOLOGIA_CLINICA = 'Psicología Clínica y Psicoterapia'
+    CONTROL_MEMORIA = 'Control de Memoria'
+    TALLERES_MEMORIA = 'Talleres de Memoria'
+    ESTIMULACION_DEMENCIAS = 'Estimulación Cognitiva en Demencias'
+    ESTIMULACION_MEMORIA = 'Estimulación Cognitiva y Memoria'
+    EST_NEUROPSICOTICOS = 'Estudios Neuropsicológicos'
+    GRUPOS_TERAPEUTICOS = 'Grupos Terapéuticos'
+    TALLERES_YOGA = 'Talleres de Yoga'
+    YOGA = 'Yoga'
   end
   #attr_accessor :body
   def body

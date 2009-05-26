@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :pictures
 
-  map.resources :articles
+  map.resources :articles, :path => 'documento'
 
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
@@ -31,10 +31,10 @@ ActionController::Routing::Routes.draw do |map|
     #end
   end
 
-  map.resources :reference_materials
-  map.resources :groups
-  map.resources :about_us
-  map.resources :contact_us
+  map.resources :reference_materials, :path => 'materiales', :collection => { :practico => :get, :teorico => :get }
+  map.resources :groups, :path => 'talleres'
+  map.resources :about_us, :path => 'acerca_de'
+  map.resources :contact_us, :path => 'contacto'
 
   # The priority is based upon order of creation: first created -> highest priority.
 

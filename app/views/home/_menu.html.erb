@@ -2,11 +2,12 @@
 		<div class="boxedB">
 			<h2>Inicio</h2>
 			<ul>
-				<li><a href="#">Psicología Clínica y Psicoterapia</a></li>
-				<li><a href="#">Talleres de Memoria</a></li>
-				<li><a href="#">Estimulación Cognitiva en Demencias</a></li>
-				<li><a href="#">Bladas</a></li>
-				<li><a href="#">Etiam posuere augue sit</a></li>
+				<li><%= link_to Article::Section::PSICOLOGIA_CLINICA, article_path(Article::Section::PSICOLOGIA_CLINICA) %></li>
+                                <li><%= link_to Article::Section::CONTROL_MEMORIA, article_path(Article::Section::CONTROL_MEMORIA) %></li>
+                                <li><%= link_to Article::Section::TALLERES_MEMORIA, article_path(Article::Section::TALLERES_MEMORIA) %></li>
+				<li><%= link_to Article::Section::ESTIMULACION_DEMENCIAS, article_path(Article::Section::ESTIMULACION_DEMENCIAS) %></li>
+				<li><%= link_to Article::Section::EST_NEUROPSICOTICOS, article_path(Article::Section::EST_NEUROPSICOTICOS) %></li>
+				<li><%= link_to Article::Section::YOGA, article_path(Article::Section::YOGA) %></li>
                                 <li><%= link_to 'Artículos relacionados', { :controller => 'home', :action => 'public_reference_materials' } %></li>
 			</ul>
     </div>
