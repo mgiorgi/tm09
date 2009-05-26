@@ -1,7 +1,8 @@
 %tr
-  %td
-    = reference_material.title
-  %td
+  %td{ :width => '80%' }
+    %h2
+      = reference_material.title
+    %br
     = reference_material.description
-  %td
-    = link_to 'Bajar', reference_material_path(reference_material)
+  %td{ :width => '20%' }
+    = link_to 'Descargar', reference_material_path(reference_material)

@@ -1,13 +1,6 @@
 %h1
   Material de Referencia
+%br
+A continuación se listan los materiales disponibles para ser descargados:
 %table
-  %thead
-    %tr
-      %th
-        Título
-      %th
-        Descripción
-      %th
-        Adjunto
-  %tbody
-    = render :partial => 'shared/reference_material', :collection => @reference_materials
+  = render :partial => 'shared/reference_material', :collection => @reference_materials
