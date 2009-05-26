@@ -55,8 +55,8 @@ set :dbpass,                "bimeleros09"
 set :git_enable_submodules, 1
 
 before "deploy:setup", :db
-after  "deploy:update", "db:symlink"
 after  "deploy:update", "applicationcontroller:symlink"
+after  "deploy:update", "db:symlink"
 after  "deploy:symlink", "hostingrails:config_fcgi"
 #before "deploy:migrate", "applicationcontroller:symlink"
 #before "deploy:migrations", "applicationcontroller:symlink"
@@ -134,7 +134,9 @@ namespace :db do
   desc "Make symlink for database yaml" 
   task :symlink do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml" 
-    run "ln -s #{shared_path}/public/system #{release_path}/public/system"
+    run "mkdir -p #{shared_path}/attachment/filename"
+    run "ln -nfs #{shared_path}/attachment/filename #{shared_path}/public/images/attachments" 
+    #run "ln -s #{shared_path}/public/system #{release_path}/public/system"
   end
 end
 

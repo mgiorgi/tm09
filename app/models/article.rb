@@ -2,11 +2,61 @@ class Article < ActiveRecord::Base
   class Section
     INICIO = 'Inicio'
   end
-  attr_accessor :body
+  #attr_accessor :body
   def body
-    CGI::unescape(self.content) unless self.content.blank?
+    remove_references(remove_images(CGI::unescape(self.content))) unless self.content.blank?
   end
-  def body=(value)
-    self.content = CGI::escape(value)
+  def body=(html_without_images_and_references)
+    html_with_images = add_images(html_without_images_and_references)
+    html_with_images_and_references = add_references(html_with_images)
+    self.content = CGI::escape(html_with_images_and_references)
+  end
+  def remove_images(value)
+    r = Regexp.new("(<img\sname='([^']*)'([^>])*>)", Regexp::IGNORECASE | Regexp::MULTILINE)
+    value.gsub(r) do |match| 
+      picture = Picture.find_by_title($2)
+      if picture
+        url = picture.filename
+        alt = picture.description
+        "(FOTO=#{picture.title})"
+      else
+        match
+      end
+    end
+  end
+  def remove_references(value)
+    r = Regexp.new("(<a\sname='([^']*)'([^>])*>)", Regexp::IGNORECASE | Regexp::MULTILINE)
+    value.gsub(r) do |match| 
+     reference = ReferenceMaterial.find_by_title($2)
+      if reference
+        "(MATERIAL=#{reference.title})"
+      else
+        match
+      end
+    end
+  end
+  def add_images(value)
+    r = Regexp.new('\(FOTO=(.*)\)', Regexp::IGNORECASE | Regexp::MULTILINE)
+    value.gsub(r) do |match| 
+      picture = Picture.find_by_title($1)
+      if picture
+        url = picture.filename
+        alt = picture.description
+        "<img name='#{picture.title}' src='/images/attachments/#{picture.filename_relative_path}' alt='#{alt}' />"
+      else
+        match
+      end
+    end if value
+  end
+  def add_references(value)
+    r = Regexp.new('\(MATERIAL=(.*)\)', Regexp::IGNORECASE | Regexp::MULTILINE)
+    value.gsub(r) do |match| 
+      reference = ReferenceMaterial.find_by_title($1)
+      if reference
+        "<a name='#{reference.title}' href='/reference_materials/#{reference.to_param}' />"
+      else
+        match
+      end
+    end if value
   end
 end
