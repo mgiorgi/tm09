@@ -36,12 +36,14 @@ Released for free under a Creative Commons Attribution 2.5 License
               <%= render :partial => 'menu' unless controller_name == 'sessions' %>
             </td>
             <td id="colA">
+              <% if params[:controller] == 'reference_materials' && (params[:action] == 'practico' || params[:action] == 'index' || params[:action] == 'teorico') %>
               <div class='nav1'>
                 <ul>
                   <li><%= link_to("Ingresar", login_path) unless logged_in? %></li>
                   <li><%= link_to("Salir", logout_path) if logged_in? %></li>
                 </ul>
               </div>
+              <% end %>
               <%= yield  %>
             </td>
           </tr>
