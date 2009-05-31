@@ -1,6 +1,6 @@
 class ReferenceMaterialsController < ApplicationController
   layout 'enter'
-  before_filter :login_required, :except => [:show] #{ |controller| controller.login_required unless (controller.params[:action] == 'show' and controller.params[:public] == 'true') }
+  before_filter { |controller| controller.login_required unless (controller.params[:action] == 'show' and controller.params[:public] == 'true') }
   before_filter :set_reference_material, :only => [:show]
   #before_filter :check_access, :only => [:nivel1, :nivel2]
   #require_role "nivel1", :for_all_except => [:index, :show]
