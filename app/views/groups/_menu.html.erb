@@ -2,9 +2,9 @@
 		<div class="boxedC">
 			<h2>Talleres</h2>
 			<ul>
-				<li><%= link_to Article::Section::ESTIMULACION_MEMORIA, article_path(Article::Section::ESTIMULACION_MEMORIA) %></li>
-                                <li><%= link_to Article::Section::GRUPOS_TERAPEUTICOS, article_path(Article::Section::GRUPOS_TERAPEUTICOS) %></li>
-                                <li><%= link_to Article::Section::TALLERES_YOGA, article_path(Article::Section::TALLERES_YOGA) %></li>                                
+				<li><%= link_to Article::Section::ESTIMULACION_MEMORIA, article_path(Article::Section::ESTIMULACION_MEMORIA, :menu => 'groups') %></li>
+                                <li><%= link_to Article::Section::GRUPOS_TERAPEUTICOS, article_path(Article::Section::GRUPOS_TERAPEUTICOS, :menu => 'groups') %></li>
+                                <li><%= link_to Article::Section::TALLERES_YOGA, article_path(Article::Section::TALLERES_YOGA, :menu => 'groups') %></li>                                
 			</ul>
     </div>
   </div>

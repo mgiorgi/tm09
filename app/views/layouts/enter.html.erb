@@ -38,8 +38,8 @@ Released for free under a Creative Commons Attribution 2.5 License
       <div id="content">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td style='vertical-align: top; background-color: <%= ApplicationHelper::MENU_BACKGROUND[params[:controller].to_sym] %>;'>
-              <%= render :partial => 'menu' unless controller_name == 'sessions' %>
+            <td style='vertical-align: top; background-color: <%= ApplicationHelper::MENU_BACKGROUND[(params[:menu] || params[:controller]).to_sym] %>;'>
+              <%= render :partial => (params[:menu] ? "#{params[:menu]}/menu" : 'menu') unless controller_name == 'sessions' %>
             </td>
             <td id="colA">
               <% if params[:controller] == 'reference_materials' && (params[:action] == 'practico' || params[:action] == 'index' || params[:action] == 'teorico') %>

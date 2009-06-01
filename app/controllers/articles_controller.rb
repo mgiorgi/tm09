@@ -13,11 +13,12 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.xml
   def show
-    @article = Article.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @article }
+    article = Article.find_by_title(params[:id])
+    @content = article && !article.content.blank? ? CGI::unescape(article.content) : ''
+    if @content.blank?
+      render :partial => 'shared/under_construction', :layout => 'enter'
+    else
+      render :partial => 'articles/show', :layout => 'enter'
     end
   end
 
