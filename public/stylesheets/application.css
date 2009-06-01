@@ -141,7 +141,7 @@ a:hover {
 
 #colB {
 	/*float: left;*/
-	width: 220px;
+	width: 100%;
 }
 
 /* BoxedA */
@@ -212,7 +212,7 @@ a:hover {
 
 .boxedB a {
 	display: block;
-	width: 199px;
+	width: 91%; /*199px;*/
 	height: 23px;
 	padding: 7px 0 0 21px;
 	background: #FDF1EC url(/images/img08.gif) no-repeat;
@@ -257,7 +257,7 @@ a:hover {
 
 .boxedC a {
 	display: block;
-	width: 199px;
+	width: 91%; /*199px;*/
 	height: 23px;
 	padding: 7px 0 0 21px;
 	background: #FFFDE4 url(/images/img15.gif) no-repeat;
@@ -301,7 +301,7 @@ a:hover {
 
 .boxedD a {
 	display: block;
-	width: 199px;
+	width: 91%; /*199px;*/
 	height: 23px;
 	padding: 7px 0 0 21px;
 	background: #EEF5FD url(/images/img12.gif) no-repeat;
@@ -344,7 +344,7 @@ a:hover {
 
 .boxedE a {
 	display: block;
-	width: 199px;
+	width: 91%; /*199px;*/
 	height: 23px;
 	padding: 7px 0 0 21px;
 	background: #e2eccb url(/images/img19.gif) no-repeat;
@@ -387,7 +387,7 @@ a:hover {
 
 .boxedF a {
 	display: block;
-	width: 199px;
+	width: 91%; /*199px;*/
 	height: 23px;
 	padding: 7px 0 0 21px;
 	background: #e2eccb url(/images/img22.gif) no-repeat;
