@@ -1,0 +1,15 @@
+<h1>Fotos de los talleres</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% @group_pictures.each do |group_picture| %>
+  <tr>
+    <td><%= image_tag "attachments/#{group_picture.filename_relative_path}", :width => '200px' %></td>
+    <td><%= group_picture.description %><br/>
+      <%= link_to 'Ver', '#', :onclick => "window.open('#{group_picture_url(group_picture, :menu => 'groups')}', 'Foto de talleres'); return false;" %>
+    </td>
+  </tr>
+<% end %>
+</table>
