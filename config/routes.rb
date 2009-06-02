@@ -26,6 +26,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :home
     admin.resources :articles, :active_scaffold => true
     admin.resources :categories, :active_scaffold => true
+    admin.resources :comments, :active_scaffold => true
     admin.resources :group_pictures, :active_scaffold => true
     admin.resources :pictures, :active_scaffold => true
     admin.resources :users, :active_scaffold => true
