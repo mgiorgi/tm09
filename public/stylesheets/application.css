@@ -301,7 +301,7 @@ a:hover {
 
 .boxedD a {
 	display: block;
-	width: 91%; /*199px;*/
+	width: 86%; /*199px;*/
 	height: 23px;
 	padding: 7px 0 0 21px;
 	background: #EEF5FD url(/images/img12.gif) no-repeat;
@@ -471,5 +471,11 @@ a:hover {
   color: #b1a8dc;
 }
 #celeste {
-  coloe: #549ee9
+  coloe: #549ee9;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
 }

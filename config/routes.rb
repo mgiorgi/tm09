@@ -34,7 +34,9 @@ ActionController::Routing::Routes.draw do |map|
     #end
   end
 
-  map.resources :reference_materials, :path => 'materiales', :collection => { :practico => :get, :teorico => :get }
+  map.resources :reference_materials, :path => 'materiales', :collection => { :practico => :get, :teorico => :get } do |reference_materials|
+    reference_materials.resources :comments
+  end
   map.resources :groups, :path => 'talleres'
   map.resources :about_us, :path => 'acerca_de'
   map.resources :contact_us, :path => 'contacto'

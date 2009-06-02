@@ -1,0 +1,34 @@
+%p#add_comment
+  = button_to_function("Comentar >>","Element.hide('add_comment'); Element.show('comment_form');document.getElementById('comments').style.height = 100")
+  
+.create_comment#comment_form{:style => "display:none"}
+  - if logged_in?
+    Un formo
+      -#    - remote_form_for (@comment || comment), :url => url_for([parent_object, (@comment || comment)]) do |f|
+      -#%table
+        -#%tr
+          -#%td
+            -#%label Asunto: 
+          -#%td
+            -#= f.text_field :title
+        -#%tr
+          -#%td
+            -#= f.label :text, "Comentario:", :size => 25
+          -#%td
+            -#= f.text_area :text, :rows => 2, :cols => 34
+        -#%tr
+          -#%td
+          -#%td
+            -#%table
+              -#%tr
+                -#%td
+                  -#%p.submit= f.submit "Dejar Comentario"
+                -#%td
+                  -#= button_to_function("Cerrar","Element.hide('comment_form'); Element.show('add_comment');document.getElementById('comments').style.height = 200")
+  - else
+    %p
+      Debes tener un usuario para comentar.
+
+.show_comments
+  %ul#comments{:style => "overflow:auto;width:350px;height:200px"}
+    -#= render :partial => "comments/mini_comments_list", :locals => { :parent_object => parent_object }

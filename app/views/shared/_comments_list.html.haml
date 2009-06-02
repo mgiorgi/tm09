@@ -1,0 +1,43 @@
+- commentable.comments.each do |comment|
+  = render (:partial => 'shared/comment', :locals => {:comment => comment})
+%p
+  %h4 Formulario para nuevo comentario
+  - form_tag nested_comments_path do
+    = hidden_field_tag 'commentable_type', commentable.class.to_s
+    = hidden_field_tag 'commentable_id', commentable.id
+    = hidden_field_tag('redirect_path', redirect_path) unless redirect_path.blank?
+    - if current_user
+      = hidden_field_tag 'comment[user_name]', current_user.name
+      = hidden_field_tag 'comment[user_email]', current_user.email
+    %TABLE
+      - unless current_user
+        %TR
+          %TD
+            %label{ :for => "title" }
+              Nombre (*):
+          %TD
+            = text_field_tag 'comment[user_name]', nil, :size => 20
+        %TR
+          %TD
+            %label{ :for => "title" }
+              Email (*):
+          %TD
+            = text_field_tag 'comment[user_email]', nil, :size => 20
+      %TR
+        %TD
+          %label{ :for => "comment" }
+            Título del Comentario:
+        %TD
+          = text_field_tag 'comment[title]', nil
+      %TR
+        %TD
+          %label{ :for => "comment" }
+            Comentario (*):
+        %TD
+          = text_area_tag 'comment[comment]', nil, :size => "50x5"
+    %br
+    (*): Indica los campos son requeridos.
+    %br
+    %br
+    = submit_tag "Enviar"
+%hr

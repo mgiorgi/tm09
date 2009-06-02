@@ -37,6 +37,19 @@ ActiveRecord::Schema.define(:version => 20090602164356) do
     t.integer "category_id"
   end
 
+  create_table "comments", :force => true do |t|
+    t.string   "title",            :limit => 50, :default => ""
+    t.string   "comment",                        :default => ""
+    t.datetime "created_at",                                     :null => false
+    t.integer  "commentable_id",                 :default => 0,  :null => false
+    t.string   "commentable_type", :limit => 15, :default => "", :null => false
+    t.integer  "user_id",                        :default => 0,  :null => false
+    t.string   "user_name",        :limit => 50
+    t.string   "user_email",       :limit => 50
+  end
+
+  add_index "comments", ["user_id"], :name => "fk_comments_user"
+
   create_table "group_pictures", :force => true do |t|
     t.text     "description"
     t.string   "filename"

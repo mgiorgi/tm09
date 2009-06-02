@@ -1,0 +1,9 @@
+- content_tag_for :li, comment do
+   
+  %p.entry-content     
+    = h(comment.text)
+    
+  .meta_data    
+    %em{:class => "title #{index.odd? if index}"}=h (comment.title)     
+    == publicado el #{comment.created_at.strftime("%d/%m/%y")} a las #{comment.created_at.strftime("%H:%M")} por 
+    %em.true=h(comment.user ? comment.user.login : 'Anónimo')

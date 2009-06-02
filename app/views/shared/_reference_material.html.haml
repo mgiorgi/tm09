@@ -1,8 +1,24 @@
-%tr
-  %td{ :width => '80%' }
-    %h2
-      = reference_material.title
-    %br
-    = reference_material.description
-  %td{ :width => '20%', :style => 'vertical-align: top;' }
-    = link_to 'Descargar', reference_material_path(reference_material, :public => true)
+-#%tr
+  -#%td{ :width => '90%' }
+    -#%h2
+      -#= reference_material.title
+    -#%br
+    -#= reference_material.description
+  -#%td{ :width => '10%', :style => 'vertical-align: top;' }
+    -#= link_to 'Descargar', reference_material_path(reference_material, :public => true)
+-#%tr
+  -#%td
+    -#%br
+    -#%h3= "Comentarios sobre #{reference_material.title}:"
+    -#= render :partial => 'shared/comments_list', :locals => { :commentable => reference_material, :nested_comments_path => reference_material_comments_path(reference_material) }
+  -#%td
+%h2.left{ :width => '90%'}
+  = reference_material.title
+%br
+%span.right
+  = link_to 'Descargar', reference_material_path(reference_material, :public => true)
+%p.left{ :style => 'clear: both;'}
+  = reference_material.description
+%h3{ :style => 'clear:both;'}= "Comentarios sobre #{reference_material.title}:"
+%p
+  = render :partial => 'shared/comments_list', :locals => { :commentable => reference_material, :nested_comments_path => reference_material_comments_path(reference_material), :redirect_path => redirect_path }

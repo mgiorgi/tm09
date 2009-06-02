@@ -3,5 +3,5 @@ A continuación se listan los materiales disponibles para ser descargados:
 %br
 %br
 %br
-%table
-  = render :partial => 'shared/reference_material', :collection => @reference_materials
+/%table
+= render :partial => 'shared/reference_material', :collection => @reference_materials, :locals => { :redirect_path => false }

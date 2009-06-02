@@ -1,0 +1,20 @@
+-#%table{ :width => "100%" }
+  -#%tr
+    -#%td{ :align => "left" }
+      -#%p
+        -#= comment.user_name
+    -#%td{ :align => "right", :style => "width: 70%;" }
+      -#%p
+        -#= "#{comment.created_at.to_date} , #{comment.created_at.to_time.hour.to_s} : #{comment.created_at.to_time.min.to_s}"
+    -#%hr
+    -#%p
+      -#= comment.comment
+%table
+  %tr
+    %td
+      %h4{'font-weight: bold'}= comment.title
+    %td
+      = (comment.user_name ? "(escrito por: #{comment.user_name}) " : '') + "#{comment.created_at.to_date} , #{comment.created_at.to_time.hour.to_s} : #{comment.created_at.to_time.min.to_s}"
+%p
+  = comment.comment
+%hr
