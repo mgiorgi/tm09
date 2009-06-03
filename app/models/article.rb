@@ -10,6 +10,7 @@ class Article < ActiveRecord::Base
     ESTIMULACION_MEMORIA = 'Estimulación Cognitiva y Memoria'
     EST_NEUROPSICOTICOS = 'Estudios Neuropsicológicos'
     GRUPOS_TERAPEUTICOS = 'Grupos Terapéuticos'
+    TALLERES_INICIO = 'Talleres'
     TALLERES_YOGA = 'Talleres de Yoga'
     YOGA = 'Yoga'
   end
