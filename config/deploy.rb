@@ -1,15 +1,16 @@
 require "eycap/recipes"
 require "erb"
+require 'mongrel_cluster/recipes'
+set :stages, %w(staging production)
+set :default_stage, 'production'
+require 'capistrano/ext/multistage'
 #############################################################
 #	Servers
 #############################################################
 
-#set :user, "deploy"
 set :user, "lokkedc"
+set :password, 'lokked09'
 set :domain, "68.233.8.4"
-#set :domain, "faces.local"
-server domain, :app, :web
-role :db, domain, :primary => true
 set :runner, :user
 
 #############################################################
@@ -18,12 +19,8 @@ set :runner, :user
 
 set :application, "talleresdememoria"
 set :keep_releases,         5
-#set :deploy_to, "/var/www/#{application}"
 set :home_dir, "/home/#{user}"
-set :deploy_to, "#{home_dir}/apps/#{application}"
-#set :dbuser,                "root"
-#set :dbpass,                "root"
-#set :monit_group,           "deploy"
+set(:deploy_to) { stage == :staging ? "/var/www/#{application}" : "#{home_dir}/apps/#{application}" }
 
 #############################################################
 #	Settings
@@ -43,62 +40,42 @@ set :scm_username,          ""
 set :scm_password,          ""
 set :scm,                   :git
 set :branch, "master"
-set :scm_passphrase, "lokked09"
 set :deploy_via,            :remote_cache
 set :repository_cache,      "#{application}_cache"
-set :production_database,   "lokkedc_talleresdememoriaproduction"
-set :production_dbhost,     "#{domain}"
-set :staging_database,      "memoria_development"
-set :staging_dbhost,        "faces.local"
 set :dbuser,                "lokkedc_bimeleros"
 set :dbpass,                "bimeleros09"
 set :git_enable_submodules, 1
+set(:scm_passphrase) { stage == :staging ? "butia02" : "lokked09" }
 
-before "deploy:setup", :db
-after  "deploy:setup", :assets
-after  "deploy:update", "applicationcontroller:symlink"
-after  "deploy:update", "db:symlink"
-after  "deploy:symlink", "hostingrails:config_fcgi"
-after  "deploy:update", "assets:symlink"
 
-#before "deploy:migrate", "applicationcontroller:symlink"
-#before "deploy:migrations", "applicationcontroller:symlink"
-
-task :staging do  
-  role :web, "faces.local"
-  role :app, "faces.local"
-  role :db , "faces.local", :primary => true
-  
-  set :rails_env, "staging"
-  set :environment_database, defer { staging_database }
-  set :environment_dbhost, defer { staging_dbhost }
-end
+################
+# DB
+###############
+set :production_database,   "lokkedc_talleresdememoriaproduction"
+set :production_dbhost,     "#{domain}"
+set :staging_database,      "talleresdememoria_staging"
+set :staging_dbhost,        "talleres.local"
 
 task :production do
   role :web, "#{domain}"
   role :app, "#{domain}"
   role :db , "#{domain}", :primary => true
-  
-  set :rails_env, "production"
-  set :environment_database, defer { production_database }
-  set :environment_dbhost, defer { production_dbhost }
+  set :stage, :produciton
 end
 
-#############################################################
-# ApplicationController symlink
-#############################################################
-
-namespace :applicationcontroller do
-  task :symlink do
-    run "ln -nfs #{release_path}/app/controllers/application_controller.rb #{release_path}/app/controllers/application.rb"
-  end
+task :staging do
+  role :web, "talleres.local"
+  role :app, "talleres.local"
+  role :db , "talleres.local", :primary => true
+  set :stage, :staging
 end
 
-namespace :hostingrails do
-  task :config_fcgi do
-    run "for i in `find #{deploy_to}/current/* -type d` ; do chmod -R g-w $i; done"
-  end
-end
+before "deploy:setup", :db
+after  "deploy:setup", :assets
+after  "deploy:update", "db:symlink"
+after  "deploy:update", "assets:symlink"
+after "deploy:update", "applicationcontroller:symlink"
+after "deploy:symlink", "hostingrails:config_fcgi"
 
 namespace :assets do
   desc "Set up the assets directory in the shared dir"
@@ -112,7 +89,6 @@ namespace :assets do
   end
 end
 
-
 #############################################################
 #	DB
 #############################################################
@@ -121,12 +97,14 @@ namespace :db do
   desc "Create database yaml in shared path" 
   task :default do
     db_config = ERB.new(<<-EOF).result(binding)
-    development: &defaults
+    staging: &defaults
       adapter: postgresql
+      username: postgres
+      encoding: utf8
+      host: localhost
+      password: root
       timeout: 5000
       database: #{staging_database}
-      username: lokkedc
-      password: lokked09
 
     test:
       <<: *defaults
@@ -156,6 +134,22 @@ namespace :db do
   end
 end
 
+#############################################################
+# ApplicationController symlink
+#############################################################
+
+namespace :applicationcontroller do
+  task :symlink do
+    run "ln -nfs #{release_path}/app/controllers/application_controller.rb #{release_path}/app/controllers/application.rb"
+  end
+end
+
+namespace :hostingrails do
+  task :config_fcgi do
+    run "for i in `find #{deploy_to}/current/* -type d` ; do chmod -R g-w $i; done"
+  end
+end
+
 # We do NOT want the reaper run, since that assumes we are the only FCGI
 # processes on the machine and we have root access.  So, we override the
 # restart task to do the proper site5 thing.
@@ -165,4 +159,3 @@ namespace :deploy do
     run "pkill -9 -u #{user} -f dispatch.fcgi"
   end
 end
-
