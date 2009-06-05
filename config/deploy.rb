@@ -30,7 +30,7 @@ set(:deploy_to) { stage == :staging ? "/var/www/#{application}" : "#{home_dir}/a
 ssh_options[:keys] = %w(/home/lokkedc/.ssh/talleresdememoria/id_rsa)
 ssh_options[:paranoid] = false
 default_run_options[:pty] = true
-set :use_sudo, false
+set(:use_sudo) { false }
 
 #############################################################
 #	Git
@@ -160,11 +160,17 @@ namespace :deploy do
   task :restart, :roles => :app do
     run "pkill -9 -u #{user} -f dispatch.fcgi"
   end
+end
+namespace :monit do
   # Redefine the application server controls to use monit.
-  %W(start stop restart).each do |event|
-    desc "#{event} using Monit"
-    task event, :except => { :no_release => true } do
-      "/usr/local/bin/monit -g #{application} #{event} all"
-    end
+  desc "start Monit"
+  task :start, :except => { :no_release => true } do
+    run "rm -rf /var/www/talleresdememoria/current/tmp/pids/*"
+    run "monit -g #{application}"
+  end
+  desc "stop Monit"
+  task :stop do
+    run "rm -rf /var/www/talleresdememoria/current/tmp/pids/*"
+    run "monit quit"
   end
 end
