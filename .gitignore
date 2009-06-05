@@ -5,3 +5,4 @@ public/images/attachments
 db/*.sqlite3
 config/database.yml
 app/controllers/application.rb
+tmp/*
