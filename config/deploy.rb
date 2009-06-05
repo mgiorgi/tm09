@@ -112,9 +112,11 @@ namespace :db do
 
     production:
       <<: *defaults
-      username: #{dbuser}
-      password: #{dbpass}
-      database: #{production_database}
+      username: #{stage == :staging ? 'postgres' : dbuser}
+      password: #{stage == :staging ? 'root' : dbpass}
+      database: #{stage == :staging ? staging_database : production_database}
+      encoding: utf8
+      host: localhost
     EOF
 
     transaction do
@@ -157,5 +159,12 @@ namespace :deploy do
   desc "Capfile override of the default restart task to eliminate reaper"
   task :restart, :roles => :app do
     run "pkill -9 -u #{user} -f dispatch.fcgi"
+  end
+  # Redefine the application server controls to use monit.
+  %W(start stop restart).each do |event|
+    desc "#{event} using Monit"
+    task event, :except => { :no_release => true } do
+      "/usr/local/bin/monit -g #{application} #{event} all"
+    end
   end
 end
