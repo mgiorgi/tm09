@@ -39,7 +39,7 @@ set :repository,            "git://github.com/mgiorgi/tm09.git"
 set :scm_username,          ""
 set :scm_password,          ""
 set :scm,                   :git
-set :branch, "master"
+set(:branch), { stage == :staging ? "staging" : "master" }
 set :deploy_via,            :remote_cache
 set :repository_cache,      "#{application}_cache"
 set :dbuser,                "lokkedc_bimeleros"
