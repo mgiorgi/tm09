@@ -27,5 +27,5 @@ config.log_level = :debug
 
 # Enable threaded mode
 # config.threadsafe!
-ADMIN_USER='admin'
-ADMIN_PASS='admin'
+#ADMIN_USER='admin'
+#ADMIN_PASS='admin'
