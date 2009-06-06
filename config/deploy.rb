@@ -148,7 +148,11 @@ end
 
 namespace :hostingrails do
   task :config_fcgi do
-    run "for i in `find #{deploy_to}/current/* -type d` ; do chmod -R g-w $i; done"
+    if stage == :staging
+      run "chmod g+w #{release_path}/log; chmod g+w #{release_path}/tmp;"
+    else
+      run "for i in `find #{deploy_to}/current/* -type d` ; do chmod -R g-w $i; done"
+    end
   end
 end
 
@@ -165,12 +169,20 @@ namespace :monit do
   # Redefine the application server controls to use monit.
   desc "start Monit"
   task :start, :except => { :no_release => true } do
-    run "rm -rf /var/www/talleresdememoria/current/tmp/pids/*"
-    run "monit -g #{application}"
+    run "/usr/local/bin/monit"
   end
   desc "stop Monit"
   task :stop do
-    run "rm -rf /var/www/talleresdememoria/current/tmp/pids/*"
-    run "monit quit"
+    run "/usr/local/bin/monit quit"
+  end
+  %w(mongrel backgroundrb).each do |process|
+    namespace process do
+      %w(start stop restart).each do |event|
+        task event, :roles => :app do
+          run "/usr/local/bin/monit -g #{process} #{event} all"
+        end
+      end
+    end
   end
 end
+

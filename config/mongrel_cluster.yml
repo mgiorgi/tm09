@@ -1,8 +1,10 @@
 --- 
-cwd: /home/manya/talleresdememoria/config/deploy.rb
+user: mongrel
+cwd: /var/www/talleresdememoria/current
 log_file: log/mongrel.log
-port: "8000"
-environment: staging
+port: "3010"
+environment: production
+group: deploy
 address: 127.0.0.1
 pid_file: tmp/pids/mongrel.pid
-servers: 3
+servers: 2
