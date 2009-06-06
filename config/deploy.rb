@@ -81,11 +81,14 @@ namespace :assets do
   desc "Set up the assets directory in the shared dir"
   task :default do
     run "mkdir -p #{shared_path}/attachment/filename"
+    run "mkdir -p #{shared_path}/group_picture/filename"
   end
   desc "Symlink the assets directory from the shared dir"
   task :symlink do
     run "rm -rf #{release_path}/public/attachment/filename"
     run "ln -nfs #{shared_path}/attachment #{release_path}/public/attachment"
+    run "rm -rf #{release_path}/public/group_picture/filename"
+    run "ln -nfs #{shared_path}/group_picture #{release_path}/public/group_picture"
   end
 end
 
@@ -133,6 +136,8 @@ namespace :db do
     #run "ln -s #{shared_path}/public/system #{release_path}/public/system"
     run "mkdir -p #{shared_path}/public/attachment/filename"
     run "ln -nfs #{shared_path}/attachment/filename #{release_path}/public/images/attachments" 
+    run "mkdir -p #{shared_path}/public/group_picture/filename"
+    run "ln -nfs #{shared_path}/group_picture/filename #{release_path}/public/images/group_pictures" 
   end
 end
 
