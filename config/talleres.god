@@ -6,7 +6,7 @@ RAILS_ROOT = "/var/www/talleresdememoria/current"
     w.group = 'mongrels'
     w.interval = 30.seconds # default      
     w.start = "mongrel_rails start -c #{RAILS_ROOT} -p #{port} \
-      -P #{RAILS_ROOT}/tmp/pids/mongrel.#{port}.pid -d"
+      -P #{RAILS_ROOT}/tmp/pids/mongrel.#{port}.pid -d -e production"
     w.stop = "mongrel_rails stop -P #{RAILS_ROOT}/tmp/pids/mongrel.#{port}.pid -e production"
     w.restart = "mongrel_rails restart -P #{RAILS_ROOT}/tmp/pids/mongrel.#{port}.pid -e production"
     w.start_grace = 10.seconds
