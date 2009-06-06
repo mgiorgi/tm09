@@ -104,7 +104,7 @@ namespace :db do
       adapter: postgresql
       username: postgres
       encoding: utf8
-      host: localhost
+      #{ stage == :staging ? 'host: localhost' : '' }
       password: root
       timeout: 5000
       database: #{staging_database}
@@ -119,7 +119,7 @@ namespace :db do
       password: #{stage == :staging ? 'root' : dbpass}
       database: #{stage == :staging ? staging_database : production_database}
       encoding: utf8
-      host: localhost
+      #{ stage == :staging ? 'host: localhost' : '' }
     EOF
 
     transaction do
