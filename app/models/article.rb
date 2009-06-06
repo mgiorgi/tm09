@@ -51,7 +51,7 @@ class Article < ActiveRecord::Base
     end
   end
   def add_images(value)
-    r = Regexp.new('\(FOTO=(.*)\)', Regexp::IGNORECASE | Regexp::MULTILINE)
+    r = Regexp.new('\(FOTO=([^)]*)\)', Regexp::IGNORECASE | Regexp::MULTILINE)
     value.gsub(r) do |match| 
       picture = Picture.find_by_title($1)
       if picture
@@ -64,7 +64,7 @@ class Article < ActiveRecord::Base
     end if value
   end
   def add_references(value)
-    r = Regexp.new('\(MATERIAL=(.*)\)', Regexp::IGNORECASE | Regexp::MULTILINE)
+    r = Regexp.new('\(MATERIAL=([^)]*)\)', Regexp::IGNORECASE | Regexp::MULTILINE)
     value.gsub(r) do |match| 
       reference = ReferenceMaterial.find_by_title($1)
       if reference
