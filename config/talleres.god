@@ -7,8 +7,8 @@ RAILS_ROOT = "/var/www/talleresdememoria/current"
     w.interval = 30.seconds # default      
     w.start = "mongrel_rails start -c #{RAILS_ROOT} -p #{port} \
       -P #{RAILS_ROOT}/tmp/pids/mongrel.#{port}.pid -d"
-    w.stop = "mongrel_rails stop -P #{RAILS_ROOT}/tmp/pids/mongrel.#{port}.pid"
-    w.restart = "mongrel_rails restart -P #{RAILS_ROOT}/tmp/pids/mongrel.#{port}.pid"
+    w.stop = "mongrel_rails stop -P -e production #{RAILS_ROOT}/tmp/pids/mongrel.#{port}.pid"
+    w.restart = "mongrel_rails restart -P -e production #{RAILS_ROOT}/tmp/pids/mongrel.#{port}.pid"
     w.start_grace = 10.seconds
     w.restart_grace = 10.seconds
     w.pid_file = File.join(RAILS_ROOT, "tmp/pids/mongrel.#{port}.pid")
