@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1.xml
   def show
     article = Article.find_by_title(params[:id])
-    @content = article && !article.content.blank? ? CGI::unescape(article.content) : ''
+    @content = article && !article.content.blank? ? article.final_content : ''
     if @content.blank?
       render :partial => 'shared/under_construction', :layout => 'enter'
     else

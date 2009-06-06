@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
   layout 'enter'
   def index
     article = Article.find_by_title(Article::Section::TALLERES_INICIO)
-    @content = article && !article.content.blank? ? CGI::unescape(article.content) : ''
+    @content = article && !article.content.blank? ? article.final_content : ''
     if @content.blank?
       render :partial => 'shared/under_construction', :layout => 'enter'
     else

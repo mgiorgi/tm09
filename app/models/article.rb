@@ -23,6 +23,9 @@ class Article < ActiveRecord::Base
     html_with_images_and_references = add_references(html_with_images)
     self.content = CGI::escape(html_with_images_and_references)
   end
+  def final_content
+    add_references(add_images(CGI::unescape(self.content)))
+  end
   def remove_images(value)
     r = Regexp.new("(<img\sname='([^']*)'([^>])*>)", Regexp::IGNORECASE | Regexp::MULTILINE)
     value.gsub(r) do |match| 

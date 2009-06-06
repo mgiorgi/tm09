@@ -1,9 +1,9 @@
 log/*.log
 public/reference_material/*
 public/attachment/*
-public/group_picture/*
 public/images/attachments
 public/images/group_pictures
+public/group_picture/*
 db/*.sqlite3
 config/database.yml
 app/controllers/application.rb
