@@ -85,9 +85,9 @@ namespace :assets do
   end
   desc "Symlink the assets directory from the shared dir"
   task :symlink do
-    run "rm -rf #{release_path}/public/attachment/filename"
+    run "rm -rf #{release_path}/public/attachment"
     run "ln -nfs #{shared_path}/attachment #{release_path}/public/attachment"
-    run "rm -rf #{release_path}/public/group_picture/filename"
+    run "rm -rf #{release_path}/public/group_picture"
     run "ln -nfs #{shared_path}/group_picture #{release_path}/public/group_picture"
   end
 end
