@@ -29,3 +29,5 @@ config.log_level = :debug
 # config.threadsafe!
 #ADMIN_USER='admin'
 #ADMIN_PASS='admin'
+config.cache_store = :mem_cache_store, 'localhost'
+#ActionController::Base.cache_store = :mem_cache_store, "localhost"

@@ -8,7 +8,9 @@ class ReferenceMaterialsController < ApplicationController
   #require_role "nivel2", :for => [:nivel2]
 
   def index
-    @reference_materials = ReferenceMaterial.find(:all, :include => [:categories], :conditions => [ 'categories.name <> ?', Category::PUBLIC_CATEGORY])
+    @reference_materials = cache(['reference_materials'], :expires_in => 15.minutes ) do
+      ReferenceMaterial.find(:all, :include => [:categories], :conditions => [ 'categories.name <> ?', Category::PUBLIC_CATEGORY])
+    end
     render :partial => 'reference_materials', :layout => 'enter'
   end
 
