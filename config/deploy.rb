@@ -30,7 +30,7 @@ set(:deploy_to) { stage == :staging ? "/var/www/#{application}" : "#{home_dir}/a
 ssh_options[:keys] = %w(/home/lokkedc/.ssh/talleresdememoria/id_rsa)
 ssh_options[:paranoid] = false
 default_run_options[:pty] = true
-set(:use_sudo) { false }
+set :use_sudo, false # { stage == :staging }
 
 #############################################################
 #	Git
@@ -163,6 +163,23 @@ namespace :deploy do
   desc "Capfile override of the default restart task to eliminate reaper"
   task :restart, :roles => :app do
     run "pkill -9 -u #{user} -f dispatch.fcgi"
+  end
+end
+namespace :god do
+  task :start do
+    run "/usr/local/bin/god -c /var/www/talleresdememoria/current/config/talleres.god"
+  end
+  task :stop do
+    run "pkill -9 -u #{user} god"
+  end
+  %w(mongrels).each do |process|
+    namespace process do
+      %w(start stop restart).each do |event|
+        task event, :roles => :app do
+          run "/usr/local/bin/god #{event} #{process}"
+        end
+      end
+    end
   end
 end
 namespace :monit do
