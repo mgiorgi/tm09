@@ -3,7 +3,7 @@ module ActionController
     def process_with_browser_profiling(request, response,
                                        method = :perform_action,
                                        *arguments)
-      if request.parameters.key?('browser_profile!' )
+      if request.headers['HTTP_REFERER'].include?('browser_profile!')
         require 'ruby-prof'
         # Profile only the action
         profile_results = RubyProf.profile {
@@ -14,6 +14,7 @@ module ActionController
         printer = RubyProf::GraphHtmlPrinter.new(profile_results)
         # Append the results to the HTML response
         response.body << printer.print("" , 0)
+        #printer.print(response.body)
         # Reset the content length (for Rails 2.0)
         response.send("set_content_length!" )
         response
