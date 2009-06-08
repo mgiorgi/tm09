@@ -4,6 +4,12 @@ public/attachment/*
 public/images/attachments
 public/images/group_pictures
 public/group_picture/*
+public/articles
+public/about_us.html
+public/index.html
+public/contact_us.html
+public/groups.html
+public/groups
 db/*.sqlite3
 config/database.yml
 app/controllers/application.rb

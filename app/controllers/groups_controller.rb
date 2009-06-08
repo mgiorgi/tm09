@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   layout 'enter'
+  caches_page :index
   def index
     article = Article.find_by_title(Article::Section::TALLERES_INICIO)
     @content = article && !article.content.blank? ? article.final_content : ''

@@ -17,12 +17,12 @@ class ReferenceMaterialsController < ApplicationController
   end
 
   def teorico
-    @reference_materials = ReferenceMaterial.find(:all, :include => [:categories], :conditions => [ 'categories.name <> ?', Category::TEORICO_CATEGORY])
+    @reference_materials = ReferenceMaterial.find(:all, :include => [:categories], :conditions => [ 'categories.name = ?', Category::TEORICO_CATEGORY])
     render :partial => 'reference_materials', :layout => 'enter'
   end
 
   def practico
-    @reference_materials = ReferenceMaterial.find(:all, :include => [:categories], :conditions => [ 'categories.name <> ?', Category::PRACTICO_CATEGORY])
+    @reference_materials = ReferenceMaterial.find(:all, :include => [:categories], :conditions => [ 'categories.name = ?', Category::PRACTICO_CATEGORY])
     render :partial => 'reference_materials', :layout => 'enter'
   end
 

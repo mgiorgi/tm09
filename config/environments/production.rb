@@ -27,5 +27,8 @@ config.log_level = :debug
 
 # Enable threaded mode
 # config.threadsafe!
-ADMIN_USER='admin'
-ADMIN_PASS='admin'
+#ADMIN_USER='admin'
+#ADMIN_PASS='admin'
+#config.cache_store = :mem_cache_store, 'localhost'
+config.cache_store = :file_store, "tmp/cache"
+#ActionController::Base.cache_store = :mem_cache_store, "localhost"

@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.xml
+  caches_page :show
   def index
     @articles = Article.all
 

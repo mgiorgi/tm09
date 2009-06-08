@@ -74,4 +74,7 @@ class Article < ActiveRecord::Base
       end
     end if value
   end
+  def to_param
+    self.title
+  end
 end

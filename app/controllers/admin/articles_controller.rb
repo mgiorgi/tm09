@@ -1,4 +1,5 @@
 class Admin::ArticlesController < Admin::BaseController
+  cache_sweeper :article_sweeper, :only => [:create, :update, :destroy]
   active_scaffold :articles do |config|
     config.label = "Artículo"
     config.create.columns = [:title, :body]
