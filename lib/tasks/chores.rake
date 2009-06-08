@@ -2,7 +2,7 @@ namespace :chores do
   
   task :hourly => :environment do
     chore("Hourly") do
-      run "rm -rf /var/www/talleresdememoria/current/log/*"
+      system "rm -rf /var/www/talleresdememoria/current/log/*"
     end
   end
   
