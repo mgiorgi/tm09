@@ -4,6 +4,7 @@ public/attachment/*
 public/images/attachments
 public/group_picture
 public/images/group_pictures
+public/index.html
 db/*.sqlite3
 config/database.yml
 app/controllers/application.rb

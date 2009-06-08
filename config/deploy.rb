@@ -65,7 +65,7 @@ end
 
 task :staging do
   role :web, "talleres.local"
-  role :app, "talleres.local"
+  role :app, "talleres.local", :cron => true
   role :db , "talleres.local", :primary => true
   set :stage, :staging
 end
@@ -203,3 +203,45 @@ namespace :monit do
   end
 end
 
+#######################
+# Cron
+######################
+
+namespace :cron do
+  task :start, :roles => :app, :only => {:cron => true} do
+    cron_tab = "#{shared_path}/cron.tab"
+    run "mkdir -p #{shared_path}/log/cron"
+    require 'erb'
+    template = File.read("config/cron.erb")
+    file = ERB.new(template).result(binding)
+    put file, cron_tab, :mode => 0644
+    # merge with the current crontab
+    # fails with an empty crontab, which is acceptable
+    run "crontab -l >> #{cron_tab}" rescue nil
+    # install the new crontab
+    run "crontab #{cron_tab}"
+  end
+end
+
+namespace :cron do
+  task :stop, :roles => :app, :only => {:cron => true} do
+    cron_tmp = "#{shared_path}/cron.old"
+    cron_tab = "#{shared_path}/cron.tab"
+    begin
+      # dump the current cron entries
+      run "crontab -l > #{cron_tmp}"
+      # remove any lines that contain the application name
+      run "awk '{if ($0 !~ /#{application}/) print $0}' " +
+        "#{cron_tmp} > #{cron_tab}"
+      # replace the cron entries
+      run "crontab #{cron_tab}"
+    rescue
+      # fails with an empty crontab, which is acceptable
+    end
+    # clean up
+    run "rm -rf #{cron_tmp}"
+  end
+end
+
+#before "deploy:stop",  "cron:stop"
+#after  "deploy:start", "cron:start"
