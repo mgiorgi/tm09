@@ -2,7 +2,7 @@ namespace :chores do
   
   task :hourly => :environment do
     chore("Hourly") do
-      system "rm -rf /var/www/talleresdememoria/current/log/*"
+      system "touch /home/lokkedc/ejecute.txt"
     end
   end
   
