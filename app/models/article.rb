@@ -29,7 +29,8 @@ class Article < ActiveRecord::Base
   def remove_images(value)
     r = Regexp.new("(<img\sname='([^']*)'([^>])*>)", Regexp::IGNORECASE | Regexp::MULTILINE)
     value.gsub(r) do |match| 
-      picture = Picture.find_by_title($2)
+      title = $2.gsub(/<[^>]*>/, '')
+      picture = Picture.find_by_title(title)
       if picture
         url = picture.filename
         alt = picture.description
@@ -42,7 +43,8 @@ class Article < ActiveRecord::Base
   def remove_references(value)
     r = Regexp.new("(<a\sname='([^']*)'([^>])*>)", Regexp::IGNORECASE | Regexp::MULTILINE)
     value.gsub(r) do |match| 
-     reference = ReferenceMaterial.find_by_title($2)
+    title = $2.gsub(/<[^>]*>/, '')
+     reference = ReferenceMaterial.find_by_title(title)
       if reference
         "(MATERIAL=#{reference.title})"
       else
@@ -52,8 +54,9 @@ class Article < ActiveRecord::Base
   end
   def add_images(value)
     r = Regexp.new('\(FOTO=([^)]*)\)', Regexp::IGNORECASE | Regexp::MULTILINE)
-    value.gsub(r) do |match| 
-      picture = Picture.find_by_title($1)
+    value.gsub(r) do |match|
+      title = $1.gsub(/<[^>]*>/, '')
+      picture = Picture.find_by_title(title)
       if picture
         url = picture.filename
         alt = picture.description
@@ -66,7 +69,8 @@ class Article < ActiveRecord::Base
   def add_references(value)
     r = Regexp.new('\(MATERIAL=([^)]*)\)', Regexp::IGNORECASE | Regexp::MULTILINE)
     value.gsub(r) do |match| 
-      reference = ReferenceMaterial.find_by_title($1)
+      title = $1.gsub(/<[^>]*>/, '')
+      reference = ReferenceMaterial.find_by_title(title)
       if reference
         "<a name='#{reference.title}' href='/reference_materials/#{reference.to_param}' />"
       else
