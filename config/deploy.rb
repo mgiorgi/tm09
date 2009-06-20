@@ -18,7 +18,7 @@ set :runner, :user
 #############################################################
 
 set :application, "talleresdememoria"
-set :keep_releases,         5
+set :keep_releases,         3
 set :home_dir, "/home/#{user}"
 set(:deploy_to) { stage == :staging ? "/var/www/#{application}" : "#{home_dir}/apps/#{application}" }
 
