@@ -10,7 +10,7 @@ Rails::Initializer.run do |config|
   config.load_paths += %W( #{RAILS_ROOT}/app/sweepers )
 
   config.gem 'haml'
-  config.gem 'RedCloth'
+  config.gem 'RedCloth', :version => '4.2.3'
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
